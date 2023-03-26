@@ -2,12 +2,34 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-// Variables for DOM References
+// Global Variables for DOM References
 var dateDisplayEl= $('#currentDay')
 var timeDisplayEl = $('#time')
-varPastEl = $('#row time-block past')
-varPresentEl = $("row time-block present")
-varFutureEl = $("row time-block future")
+//var PastEl = $('#row time-block past')
+//var PresentEl = $("#row time-block present")
+//var FutureEl = $("#row time-block future")
+//get current time in hA format
+//var currentHour = moment().hour();
+//array that lists all of the hours for current work day
+//var workDayHours = [
+  //moment().hour(9).format('hA'),
+ // moment().hour(10).format('hA'),
+ // moment().hour(11).format('hA'),
+ // moment().hour(12).format('hA'),
+  //moment().hour(1).format('hA'),
+  //moment().hour(2).format('hA'),
+  //moment().hour(3).format('hA'),
+  //moment().hour(4).format('hA'),
+  //moment().hour(5).format('hA'),
+  //moment().hour(6).format('hA')
+//];
+// target the div that holds the time block hour
+var timeBlockHour = $('col-2 col-md-1 hour text-center')
+
+//target the div that holds the time task info
+var task = $(".col-8 col-md-10 description")
+
+// End Global Variables
 
 //Function to Display Date
 function displayDate () {
@@ -21,21 +43,35 @@ function displayTime () {
   timeDisplayEl.text(timeNow)
 }
 
+function auditTimeBlock(timeBlockEventSpace) {
+  //retrieve the hour from the div and convert it to the x'th hour of the day
+  var currentTimeBlockHour = moment($("#container-lg px-5").text().trim(), 'hA').hour();
+
+  //remove class of 'past present future
+  $(timeBlockEventSpace).removeClass('past present future');
+
+  //conditional to add correct color background to time block depending on time
+  if (currentTimeBlockHour > currentHour) {
+      $(timeBlockEventSpace).addClass('future');
+  }
+  else if (currentTimeBlockHour === currentHour) {
+      $(timeBlockEventSpace).addClass('present');
+  }
+  else {
+      $(timeBlockEventSpace).addClass('past');
+  }
+}
+
 // Call Functions displayTime & displayDate
 displayDate ();
 
 displayTime ();
 setInterval (displayTime, 1000);
 
- // Function to Color Code Past,Present,Future
+//moment ();
+//hour ();
 
- if {(dayjs().isAfter(dayjs('timeDisplayEl')));
  
- if (dayjs().isSame(dayjs('timeDisplayEl')));
-
- if (dayjs().isBefore(dayjs('timeDisplayEl')));
-
- }
 
 $(function () {
   
