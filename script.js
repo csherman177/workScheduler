@@ -29,7 +29,8 @@ function timeBlockColor() {
   var hour = dayjs().hour();
 
   $(".time-block").each(function() {
-      var currHour = parseInt($(this).attr("id"));
+    var currHour = parseInt($(this).attr('id').split('-')[1]);
+    console.log(currHour);
 
       // console.log(this); //each time-block
 
@@ -62,8 +63,8 @@ function usePlanner() {
         var currHour = $(this).text();
         var currPlan = localStorage.getItem(currHour);
 
-        // console.log(this);
-        // console.log(currHour);
+        console.log(this);
+        console.log (currHour);
 
         if(currPlan !== null) {
             $(this).siblings(".plan").val(currPlan);
