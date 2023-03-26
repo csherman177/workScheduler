@@ -25,12 +25,8 @@ function displayTime () {
 }
 
 // Function for Time Block Color
-function timeBlockColor () {
-  var hour = moment().hours ()
-}
-
 function timeBlockColor() {
-  var hour = moment().hours();
+  var hour = dayjs().hour();
 
   $(".time-block").each(function() {
       var currHour = parseInt($(this).attr("id"));
@@ -82,8 +78,10 @@ displayDate ();
 displayTime ();
 setInterval (displayTime, 1000);
  
+timeBlockColor();
 
 $(function () {
+
   
   // Event Listener for Each Button
 
