@@ -2,12 +2,51 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-var today = dayjs();
-$('#currentDay').text(today.format('DD/MM/YYYY'));
+// Variables for DOM References
+var dateDisplayEl= $('#currentDay')
+var timeDisplayEl = $('#time')
+varPastEl = $('#row time-block past')
+varPresentEl = $("row time-block present")
+varFutureEl = $("row time-block future")
+
+//Function to Display Date
+function displayDate () {
+  var rightNow = dayjs().format ('MMM DD, YYYY');
+  dateDisplayEl.text(rightNow)
+}
+
+// Function to Display Time
+function displayTime () {
+  var timeNow = dayjs ().format ('hh:mm:ss a');
+  timeDisplayEl.text(timeNow)
+}
+
+// Call Functions displayTime & displayDate
+displayDate ();
+
+displayTime ();
+setInterval (displayTime, 1000);
+
+ // Function to Color Code Past,Present,Future
+
+ if {(dayjs().isAfter(dayjs('timeDisplayEl')));
+ 
+ if (dayjs().isSame(dayjs('timeDisplayEl')));
+
+ if (dayjs().isBefore(dayjs('timeDisplayEl')));
+
+ }
 
 $(function () {
+  
+  // Event Listener for Each Button
 
- 
+
+
+  // Save Answers to Local Storage
+
+
+  
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
