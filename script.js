@@ -5,27 +5,8 @@
 // Global Variables for DOM References
 var dateDisplayEl= $('#currentDay')
 var timeDisplayEl = $('#time')
-//var PastEl = $('#row time-block past')
-//var PresentEl = $("#row time-block present")
-//var FutureEl = $("#row time-block future")
-//get current time in hA format
-//var currentHour = moment().hour();
-//array that lists all of the hours for current work day
-//var workDayHours = [
-  //moment().hour(9).format('hA'),
- // moment().hour(10).format('hA'),
- // moment().hour(11).format('hA'),
- // moment().hour(12).format('hA'),
-  //moment().hour(1).format('hA'),
-  //moment().hour(2).format('hA'),
-  //moment().hour(3).format('hA'),
-  //moment().hour(4).format('hA'),
-  //moment().hour(5).format('hA'),
-  //moment().hour(6).format('hA')
-//];
-// target the div that holds the time block hour
+var saveBtn = $(".saveBtn");
 var timeBlockHour = $('col-2 col-md-1 hour text-center')
-
 //target the div that holds the time task info
 var task = $(".col-8 col-md-10 description")
 
@@ -33,8 +14,8 @@ var task = $(".col-8 col-md-10 description")
 
 //Function to Display Date
 function displayDate () {
-  var rightNow = dayjs().format ('MMM DD, YYYY');
-  dateDisplayEl.text(rightNow)
+  var moment = dayjs().format ('MMM DD, YYYY');
+  dateDisplayEl.text(moment)
 }
 
 // Function to Display Time
@@ -43,34 +24,63 @@ function displayTime () {
   timeDisplayEl.text(timeNow)
 }
 
-function auditTimeBlock(timeBlockEventSpace) {
-  //retrieve the hour from the div and convert it to the x'th hour of the day
-  var currentTimeBlockHour = moment($("#container-lg px-5").text().trim(), 'hA').hour();
-
-  //remove class of 'past present future
-  $(timeBlockEventSpace).removeClass('past present future');
-
-  //conditional to add correct color background to time block depending on time
-  if (currentTimeBlockHour > currentHour) {
-      $(timeBlockEventSpace).addClass('future');
-  }
-  else if (currentTimeBlockHour === currentHour) {
-      $(timeBlockEventSpace).addClass('present');
-  }
-  else {
-      $(timeBlockEventSpace).addClass('past');
-  }
+// Function for Time Block Color
+function timeBlockColor () {
+  var hour = moment().hours ()
 }
+
+function timeBlockColor() {
+  var hour = moment().hours();
+
+  $(".time-block").each(function() {
+      var currHour = parseInt($(this).attr("id"));
+
+      // console.log(this); //each time-block
+
+      if (currHour > hour) {
+          $(this).addClass("future");
+      } else if (currHour === hour) {
+          $(this).addClass("present");
+      } else {
+          $(this).addClass("past");
+      }
+  })
+};
+
+// WHEN I click the save button for that time block
+saveBtn.on("click", function() {
+
+    // console.log(this); //save button
+    var time = $(this).siblings(".hour").text();
+    var plan = $(this).siblings(".plan").val();
+
+    // THEN the text for that event is saved in local storage
+    localStorage.setItem(time, plan);
+});
+
+// WHEN I refresh the page
+// THEN the saved events persist
+function usePlanner() {
+
+    $(".hour").each(function() {
+        var currHour = $(this).text();
+        var currPlan = localStorage.getItem(currHour);
+
+        // console.log(this);
+        // console.log(currHour);
+
+        if(currPlan !== null) {
+            $(this).siblings(".plan").val(currPlan);
+        }
+    });
+}
+
 
 // Call Functions displayTime & displayDate
 displayDate ();
 
 displayTime ();
 setInterval (displayTime, 1000);
-
-//moment ();
-//hour ();
-
  
 
 $(function () {
