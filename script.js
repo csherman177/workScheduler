@@ -30,7 +30,7 @@ function timeBlockColor() {
 
   $(".time-block").each(function() {
     var currHour = parseInt($(this).attr('id').split('-')[1]);
-    console.log(currHour);
+    //console.log(currHour);
 
       // console.log(this); //each time-block
 
@@ -44,34 +44,19 @@ function timeBlockColor() {
   })
 };
 
-// WHEN I click the save button for that time block
-saveBtn.on("click", function() {
+// Button Click Needs to Store Information
 
-    // console.log(this); //save button
-    var time = $(this).siblings(".hour").text();
-    var plan = $(this).siblings(".plan").val();
+var textDescriptionEl = $("#col-8 col-md-10 description");
+var buttonEl = $("#btn saveBtn col-2 col-md-1");
+var inputAnswer = $(".3");
 
-    // THEN the text for that event is saved in local storage
-    localStorage.setItem(time, plan);
-});
+function saveToStorage () {
+  const value = inputAnswer.value;
+  localStorage.setItem("3",value);
+  console.log(localStorage)
 
-// WHEN I refresh the page
-// THEN the saved events persist
-function usePlanner() {
-
-    $(".hour").each(function() {
-        var currHour = $(this).text();
-        var currPlan = localStorage.getItem(currHour);
-
-        console.log(this);
-        console.log (currHour);
-
-        if(currPlan !== null) {
-            $(this).siblings(".plan").val(currPlan);
-        }
-    });
+  buttonEl.addEventListener("click", saveToStorage);
 }
-
 
 // Call Functions displayTime & displayDate
 displayDate ();
